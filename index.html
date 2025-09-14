@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GOLDEN – Retriever Memecoin</title>
+  <meta name="description" content="GOLDEN (GOLDEN) – retriever memecoin on Base. 0% tax, fixed supply, forever fetch.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>.animate-in{animation:fadeInUp .25s ease both}@keyframes fadeInUp{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}</style>
+</head>
+<body class="min-h-screen bg-gradient-to-b from-amber-50 via-amber-50 to-amber-100 text-stone-900">
+  <div class="max-w-4xl mx-auto p-6 text-sm text-stone-600">
+    <div class="mb-4">Admin at <a href="/admin/" class="underline">/admin</a> • Edit content via <code>settings.json</code></div>
+  </div>
+  <div id="root"></div>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script>
+  const { useState, useEffect } = React;
+  function App() {
+    const def = {
+      heroImg: "/golden-hero.jpg",
+      token: { name:"GOLDEN", symbol:"GOLDEN", address:"0xCD0C8c94c4652f0FE969630A1C952b733C0Ad867", decimals:18, supply:"7,000,000,000" },
+      links: { dex:"https://aerodrome.finance/", basescanToken:"", telegram:"", twitter:"" },
+      slogans: ["Who’s a good coin?","Fetch your bag.","Sit. Stay. Stake.","In dogs we trust.","No tricks. Just treats.","One token = one tail wag."],
+      roadmap: [
+        {title:"1) Trading", desc:"Launch pool on Base, lock LP, community push."},
+        {title:"2) 1% to Shelters", desc:"Transparent charity wallet + reports."},
+        {title:"3) Staking", desc:"Non-custodial staking for loyal holders."},
+        {title:"4) Retriever Events", desc:"IRL + online contests, meetups, merch."}
+      ]
+    };
+    const [cfg, setCfg] = useState(def);
+    useEffect(()=>{ fetch("/settings.json").then(r=>r.ok?r.json():null).then(d=>{ if(!d) return; setCfg(prev=>({...prev, ...d, token:{...prev.token,...(d.token||{})}, links:{...prev.links,...(d.links||{})}, slogans:Array.isArray(d.slogans)&&d.slogans.length?d.slogans:prev.slogans, roadmap:Array.isArray(d.roadmap)&&d.roadmap.length?d.roadmap:prev.roadmap}))}).catch(()=>{}) },[]);
+    const TOKEN = cfg.token;
+    const LINKS = {...cfg.links, basescanToken: cfg.links.basescanToken || `https://basescan.org/token/${TOKEN.address}`};
+    function Section({id,title,children}){return React.createElement("section",{id,className:"max-w-6xl mx-auto px-4 py-12"},React.createElement("h2",{className:"text-2xl md:text-3xl font-bold mb-4"},title),React.createElement("div",{className:"text-slate-700/90 leading-relaxed"},children))}
+    return React.createElement("div",null,
+      React.createElement("section",{className:"max-w-6xl mx-auto px-4 pt-10 pb-6"},React.createElement("div",{className:"grid md:grid-cols-2 gap-8 items-center"},
+        React.createElement("div",null,React.createElement("h1",{className:"text-4xl md:text-6xl font-extrabold"},"Who's a ",React.createElement("span",{className:"text-amber-600"},"good coin"),"? 🐾"),React.createElement("p",{className:"mt-3 text-lg"},TOKEN.name," (",TOKEN.symbol,") on Base • 0% tax • Fixed supply"),React.createElement("div",{className:"mt-4 p-3 rounded-xl bg-white/70 border border-amber-200"},React.createElement("div",{className:"text-xs uppercase tracking-wider text-stone-500"},"Contract"),React.createElement("div",{className:"mt-1 break-all font-mono text-sm"},TOKEN.address))),
+        React.createElement("div",{className:"rounded-2xl overflow-hidden shadow"},React.createElement("img",{src:cfg.heroImg, alt:"GOLDEN", className:"w-full h-full object-cover"}))
+      )),
+      React.createElement(Section,{id:"tokenomics", title:"Tokenomics"}, React.createElement("ul",{className:"list-disc pl-5 space-y-1"}, React.createElement("li",null,"80% LP (locked)"), React.createElement("li",null,"10% Marketing & Partnerships"), React.createElement("li",null,"10% Community & OTC"))),
+      React.createElement(Section,{id:"roadmap", title:"Roadmap"}, React.createElement("ol",{className:"list-decimal pl-5 space-y-1"}, cfg.roadmap.map((x,i)=>React.createElement("li",{key:i}, React.createElement("b",null,x.title,": "), x.desc))))
+    );
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(App));
+  </script>
+</body>
+</html>

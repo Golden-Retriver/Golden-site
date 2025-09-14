@@ -1,0 +1,42 @@
+{
+  "heroImg": "/golden-hero.jpg",
+  "token": {
+    "name": "GOLDEN",
+    "symbol": "GOLDEN",
+    "address": "0xCD0C8c94c4652f0FE969630A1C952b733C0Ad867",
+    "decimals": 18,
+    "supply": "7,000,000,000"
+  },
+  "links": {
+    "dex": "https://aerodrome.finance/",
+    "basescanToken": "",
+    "telegram": "",
+    "twitter": ""
+  },
+  "slogans": [
+    "Who\u2019s a good coin?",
+    "Fetch your bag.",
+    "Sit. Stay. Stake.",
+    "In dogs we trust.",
+    "No tricks. Just treats.",
+    "One token = one tail wag."
+  ],
+  "roadmap": [
+    {
+      "title": "1) Trading",
+      "desc": "Launch pool on Base, lock LP, community push."
+    },
+    {
+      "title": "2) 1% to Shelters",
+      "desc": "Transparent charity wallet + reports."
+    },
+    {
+      "title": "3) Staking",
+      "desc": "Non-custodial staking for loyal holders."
+    },
+    {
+      "title": "4) Retriever Events",
+      "desc": "IRL + online contests, meetups, merch."
+    }
+  ]
+}

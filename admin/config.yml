@@ -1,0 +1,43 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+site_url: "/"
+logo_url: ""
+
+collections:
+  - label: "Site Settings"
+    name: "settings"
+    files:
+      - label: "General"
+        name: "general"
+        file: "settings.json"
+        fields:
+          - { label: "Hero Image", name: "heroImg", widget: "image", allow_multiple: false }
+          - label: "Token"
+            name: "token"
+            widget: "object"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Symbol", name: "symbol", widget: "string" }
+              - { label: "Address", name: "address", widget: "string" }
+              - { label: "Decimals", name: "decimals", widget: "number", value_type: "int" }
+              - { label: "Supply", name: "supply", widget: "string" }
+          - label: "Links"
+            name: "links"
+            widget: "object"
+            fields:
+              - { label: "DEX URL", name: "dex", widget: "string", required: false }
+              - { label: "BaseScan Token URL", name: "basescanToken", widget: "string", required: false }
+              - { label: "Telegram", name: "telegram", widget: "string", required: false }
+              - { label: "Twitter/X", name: "twitter", widget: "string", required: false }
+          - { label: "Slogans", name: "slogans", widget: "list", field: {label: Slogan, name: slogan, widget: string} }
+          - label: "Roadmap"
+            name: "roadmap"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "desc", widget: "text" }
